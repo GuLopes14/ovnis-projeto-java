@@ -1,9 +1,6 @@
 package br.com.fiap.ovnis.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +18,14 @@ public class Ovnis {
     private String localizacao;
     private String data;
     private String descricao;
+    
+    @Enumerated(EnumType.STRING)
+    private Shape shape;
+    
+    public enum Shape {
+        DISC,
+        SPHERE,
+        TRIANGLE,
+        OTHER
+    }
 }
