@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="dracula" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar OVNI</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<main class="grid place-items-center p-8">
+    <h2 class="font-bold text-xl mb-4">Novo Avistamento de OVNI</h2>
+    <form th:action="@{/ovnis}" th:object="${ovnis}" method="post" class="w-full max-w-md">
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend">Localização</legend>
+            <input th:field="*{location}" type="text" class="input w-full" placeholder="Digite a localização" required />
+        </fieldset>
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend">Data e Hora</legend>
+            <input th:field="*{date}" type="datetime-local" class="input w-full" required />
+        </fieldset>
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend">Cor</legend>
+            <input th:field="*{color}" type="text" class="input w-full" placeholder="Cor do OVNI" required />
+        </fieldset>
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend">Formato</legend>
+            <select th:field="*{shape}" class="select w-full" required>
+                <option th:value="DISC">Disco</option>
+                <option th:value="SPHERE">Esfera</option>
+                <option th:value="TRIANGLE">Triângulo</option>
+                <option th:value="OTHER">Outro</option>
+            </select>
+        </fieldset>
+        <fieldset class="fieldset mb-4">
+            <legend class="fieldset-legend">Quantidade</legend>
+            <input th:field="*{quantity}" type="number" min="1" class="input w-full" required />
+        </fieldset>
+        <div class="flex justify-between">
+            <a th:href="@{/ovnis}" class="btn btn-soft">Cancelar</a>
+            <button class="btn btn-soft btn-primary" type="submit">Cadastrar</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

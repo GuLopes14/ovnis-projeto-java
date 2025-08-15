@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.fiap.ovnis.model.Ovnis;
 import br.com.fiap.ovnis.service.OvnisService;
-import jakarta.validation.Valid;
-
-
 
 @Controller
 @RequestMapping("/ovnis")
@@ -23,22 +20,26 @@ public class OvnisController {
         this.service = service;
     }
 
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("registros", service.getAll());
-        model.addAttribute("ovnis", new Ovnis());
         return "index";
     }
 
+    @GetMapping("/cadastro")
+    public String novo(Model model) {
+        model.addAttribute("ovnis", new Ovnis());
+        return "form";
+    }
+
     @PostMapping
-    public String add(@Valid @ModelAttribute("ovnis") Ovnis ovnis, BindingResult result, Model model) {
+    public String add(@ModelAttribute("ovnis") Ovnis ovnis, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("registros", service.getAll());
-            return "index";
+            model.addAttribute("ovnis", ovnis);
+            return "form";
         }
         service.save(ovnis);
         return "redirect:/ovnis";
     }
-    
-    
 }
