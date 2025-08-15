@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registros de OVNIs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.css" rel="stylesheet" />
+</head>
+<body class="bg-base-200 min-h-screen">
+
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Registros de Visualização de OVNIs</h1>
+
+    <form th:action="@{/ovnis}" th:object="${ovnis}" method="post" class="card shadow-lg p-6 mb-8 max-w-lg mx-auto bg-base-100">
+        <div class="form-control mb-4">
+            <label class="label font-bold" for="localizacao">Localização:</label>
+            <input class="input input-bordered w-full" type="text" id="localizacao" th:field="*{localizacao}" placeholder="Digite a localização" required />
+        </div>
+        <div class="form-control mb-4">
+            <label class="label font-bold" for="data">Data:</label>
+            <input class="input input-bordered w-full" type="text" id="data" th:field="*{data}" placeholder="Digite a data" required />
+        </div>
+        <div class="form-control mb-4">
+            <label class="label font-bold" for="descricao">Descrição:</label>
+            <input class="input input-bordered w-full" type="text" id="descricao" th:field="*{descricao}" placeholder="Descreva o avistamento" />
+        </div>
+        <button class="btn btn-primary w-full" type="submit">Adicionar Registro</button>
+    </form>
+
+    <ul class="space-y-4">
+        <li th:each="registro : ${registros}" class="card card-bordered p-4 bg-base-100">
+            <div>
+                <span class="font-bold" th:text="${registro.localizacao}">Localização</span>
+                <span class="badge badge-info mx-2" th:text="${registro.data}">Data</span>
+                <span th:text="${registro.descricao}">Descrição</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
